@@ -8,3 +8,7 @@ target/
 
 # Macos
 .DS_Store
+
+# Scriipts
+account-service-log.txt
+account-service-pid.txt
