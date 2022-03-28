@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.sg.kata</groupId>
+    <artifactId>account-service</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>account-service</name>
+    <description>Account service for deposit and withdrawal functionalities</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>11</java.version>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <spring-boot.version>2.6.5</spring-boot.version>
+        <spring-boot-maven-plugin.version>2.4.5</spring-boot-maven-plugin.version>
+        <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+        <org.lombok.version>1.18.20</org.lombok.version>
+        <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+        <junit.version>4.12</junit.version>
+        <springdoc.version>1.6.6</springdoc.version>
+        <!-- Account modules versions -->
+        <account-application.version>${project.version}</account-application.version>
+        <account-core.version>${project.version}</account-core.version>
+        <persistence-adapter.version>${project.version}</persistence-adapter.version>
+        <restapi-adapter.version>${project.version}</restapi-adapter.version>
+    </properties>
+
+    <modules>
+        <module>account-application</module>
+        <module>account-core</module>
+        <module>account-adapters/persistence-adapter</module>
+        <module>account-adapters/restapi-adapter</module>
+    </modules>
+
+   <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-mapstruct-binding</artifactId>
+                <version>${lombok-mapstruct-binding.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tngtech.archunit</groupId>
+                <artifactId>archunit-junit5</artifactId>
+                <version>${archunit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+
+            <!-- Account service modules -->
+            <dependency>
+                <groupId>com.sg.kata</groupId>
+                <artifactId>account-core</artifactId>
+                <version>${account-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sg.kata</groupId>
+                <artifactId>account-application</artifactId>
+                <version>${account-application.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sg.kata</groupId>
+                <artifactId>restapi-adapter</artifactId>
+                <version>${restapi-adapter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sg.kata</groupId>
+                <artifactId>persistence-adapter</artifactId>
+                <version>${persistence-adapter.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- Only common dependencies that will be used by different modules -->
+    <dependencies>
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Mapper -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${org.mapstruct.version}</version>
+        </dependency>
+    </dependencies>
+</project>
